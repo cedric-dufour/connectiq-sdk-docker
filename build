@@ -1,0 +1,9 @@
+#!/bin/sh
+[ -z "${CIQ_SDK_VERSION}" ] && echo 'ERROR: Missing CIQ_SDK_VERSION environment variable' && exit 1
+exec docker build \
+  --file=Dockerfile \
+  --tag=local/connectiq-sdk:${CIQ_SDK_VERSION} \
+  --build-arg CIQ_SDK_VERSION=${CIQ_SDK_VERSION} \
+  --build-arg CIQ_SDK_UID=$(id -u) \
+  --build-arg CIQ_SDK_GID=$(id -g) \
+  .
