@@ -79,6 +79,8 @@ COPY --from=installer /opt/connectiq-sdk-linux /opt/connectiq-sdk-linux
 RUN \
     ln -s "/opt/connectiq-sdk-manager-linux/bin/sdkmanager" "/usr/local/bin/sdkmanager" \
     && touch "/opt/connectiq-sdk-linux/bin/default.jungle" \
-    && chown _ciq "/opt/connectiq-sdk-linux/bin/default.jungle"
+    && chown _ciq "/opt/connectiq-sdk-linux/bin/default.jungle" \
+    && mkdir "/home/ciq/src" \
+    && chown _ciq:_ciq "/home/ciq/src"
 
 CMD /bin/bash

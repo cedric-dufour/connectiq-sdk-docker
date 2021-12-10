@@ -16,6 +16,6 @@ exec docker run \
   --volume=${CIQ_SDK_DIR}:/home/ciq/.Garmin/ConnectIQ:rw \
   ${CIQ_SRC_DIR:+--volume=${CIQ_SRC_DIR}:/home/ciq/src:rw} \
   --user=_ciq \
-  --workdir=/home/ciq \
+  --workdir=/home/ciq/src \
   local/connectiq-sdk:${CIQ_SDK_VERSION} \
   /bin/bash
