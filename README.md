@@ -21,6 +21,6 @@ Other available environment variables:
 
 * `CIQ_SRC_DIR`: path to your CIQ projects source code, mounted in ` /home/ciq/src` (default: none)
 
-Post scriptum: Garmin ConnectIQ SDK uses long-deprecated libraries - like `libwebkit-1.0` or `libjpeg8` -
+Post scriptum: Garmin ConnectIQ SDK uses long-deprecated libraries - like `libwebkitgtk-1.0` or `libjpeg8` -
 which are no longer available on recent Linux distributions. This containerized development environment
 works around this issue by being based on `ubuntu:bionic (18.04, LTS)` image.
