@@ -11,6 +11,7 @@ exec docker run \
   --rm=true \
   --env=DISPLAY=${DISPLAY} \
   --env=XAUTHORITY=/home/ciq/.Xauthority \
+  --device=/dev/dri:/dev/dri \
   --volume=/tmp/.X11-unix:/tmp/.X11-unix:rw \
   --volume=${XAUTHORITY}:/home/ciq/.Xauthority:ro \
   --volume=${CIQ_SDK_DIR}:/home/ciq/.Garmin/ConnectIQ:rw \

@@ -6,4 +6,5 @@ exec docker build \
   --build-arg CIQ_SDK_VERSION=${CIQ_SDK_VERSION} \
   --build-arg CIQ_SDK_UID=$(id -u) \
   --build-arg CIQ_SDK_GID=$(id -g) \
+  --build-arg EULA_ACCEPT_MSCOREFONTS=${EULA_ACCEPT_MSCOREFONTS:-false} \
   .

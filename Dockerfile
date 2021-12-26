@@ -12,7 +12,8 @@ ENV CIQ_SDK_LIST_URL="${CIQ_SDK_DIR_URL}/sdks.json"
 
 # OS dependencies
 RUN \
-    apt-get update --quiet \
+    export DEBIAN_FRONTEND='noninteractive' \
+    && apt-get update --quiet \
     && apt-get install --no-install-recommends --yes \
        ca-certificates \
        jq \
@@ -43,18 +44,32 @@ FROM ubuntu:bionic AS sdk
 
 ARG CIQ_SDK_UID=1000
 ARG CIQ_SDK_GID=1000
+ARG EULA_ACCEPT_MSCOREFONTS="false"
+
+# Legalese
+RUN \
+    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula boolean ${EULA_ACCEPT_MSCOREFONTS}" | debconf-set-selections
 
 # OS dependencies
+# NOTA BENE:
+# - Connect IQ SDK requires: libusb-1.0, libjeg8, libwebkitgtk-1.0
+# - Hiero requires: openjdk-8-jdk, x11-xserver-utils (xrandr), libnvidia-gl-460 (<-> GLX)
 RUN \
-    apt-get update --quiet \
+    export DEBIAN_FRONTEND='noninteractive' \
+    && apt-get update --quiet \
     && apt-get install --no-install-recommends --yes \
        ca-certificates \
        curl \
        libusb-1.0-0 \
        libwebkitgtk-1.0-0 \
        make \
-       openjdk-11-jdk \
+       openjdk-8-jdk \
        sudo \
+       tzdata \
+       x11-xserver-utils \
+       mesa-utils \
+       libnvidia-gl-460 \
+       ttf-mscorefonts-installer \
     && apt-get clean
 
 # User/group
