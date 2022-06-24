@@ -1,5 +1,5 @@
 ## Installer
-FROM ubuntu:bionic AS installer
+FROM ubuntu:focal AS installer
 
 ARG CIQ_SDK_VERSION
 ENV CIQ_SDK_DOWNLOAD_URL="https://developer.garmin.com/downloads/connect-iq"
@@ -40,7 +40,7 @@ RUN \
 
 
 ## SDK
-FROM ubuntu:bionic AS sdk
+FROM ubuntu:focal AS sdk
 
 ARG CIQ_SDK_UID=1000
 ARG CIQ_SDK_GID=1000
@@ -52,8 +52,8 @@ RUN \
 
 # OS dependencies
 # NOTA BENE:
-# - Connect IQ SDK requires: libusb-1.0, libjeg8, libwebkitgtk-1.0
-# - Hiero requires: openjdk-8-jdk, x11-xserver-utils (xrandr), libnvidia-gl-460 (<-> GLX)
+# - Connect IQ SDK requires: libusb-1.0, libwebkit2gtk-4.0-37
+# - Hiero requires: openjdk-8-jdk, x11-xserver-utils (xrandr), libnvidia-gl-470 (<-> GLX)
 RUN \
     export DEBIAN_FRONTEND='noninteractive' \
     && apt-get update --quiet \
@@ -61,14 +61,14 @@ RUN \
        ca-certificates \
        curl \
        libusb-1.0-0 \
-       libwebkitgtk-1.0-0 \
+       libwebkit2gtk-4.0-37 \
        make \
        openjdk-8-jdk \
        sudo \
        tzdata \
        x11-xserver-utils \
        mesa-utils \
-       libnvidia-gl-460 \
+       libnvidia-gl-470 \
        ttf-mscorefonts-installer \
     && apt-get clean
 
